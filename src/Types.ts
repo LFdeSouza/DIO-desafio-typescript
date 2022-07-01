@@ -22,6 +22,18 @@ export interface Film {
   vote_count: number;
 }
 
+export interface List {
+  description: string;
+  favorite_count: number;
+  id: number;
+  items: Film[];
+  item_count: number;
+  iso_639_1: string;
+  list_type: string;
+  name: string;
+  poster_path: null;
+}
+
 export interface ReqTokenRes {
   success?: boolean;
   expires_at?: string;
@@ -35,4 +47,28 @@ export interface CreateSessionRes {
   session_id?: string;
   status_message?: string;
   status_code?: number;
+}
+
+export interface AccountDetailsRes {
+  avatar?: any;
+  id?: number;
+  iso_639_1?: string;
+  iso_3166_1?: string;
+  name?: string;
+  include_adult?: boolean;
+  username?: string;
+}
+
+export interface ListRes {
+  page: number;
+  results: List[];
+  total_pages: number;
+  total_results: number;
+  status_code: number;
+  status_message: string;
+}
+
+export enum ListIndexOperation {
+  increment = "increment",
+  decrement = "decrement",
 }

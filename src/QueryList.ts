@@ -1,4 +1,5 @@
 import { Film } from "./Types";
+import { addMovieToList } from "./app";
 
 export class QueryList {
   private _movieList?: Film[];
@@ -34,9 +35,15 @@ export class QueryList {
       h5.textContent = film.title;
       btn.classList.add("list-btn");
       btn.textContent = "Adicionar";
+      btn.id = film.id.toString();
       li.appendChild(h5);
       li.appendChild(btn);
       listContainer?.appendChild(li);
+
+      btn.addEventListener("click", (e) => {
+        const target = e.target as Element;
+        addMovieToList(target.id);
+      });
     });
   };
 }

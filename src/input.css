@@ -16,4 +16,8 @@
   .list-btn {
     @apply ml-4 w-32 cursor-pointer rounded bg-cyan-700 px-2 text-center text-white hover:bg-cyan-600;
   }
+
+  .btn-user-list {
+    @apply ml-2 rounded bg-cyan-700 p-1 px-3 text-white hover:bg-cyan-600;
+  }
 }

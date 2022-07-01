@@ -1,9 +1,9 @@
-import { Film, QueryResponse } from "./Types";
+import { ListIndexOperation, QueryResponse } from "./Types";
 import { User } from "./User";
 import { QueryList } from "./QueryList";
 
 const apiKey = "3f301be7381a03ad8d352314dcc3ec1d";
-let sessionUser;
+let sessionUser: User | undefined;
 
 // Login
 const usernameInput = document.querySelector("#username")! as HTMLInputElement;
@@ -27,6 +27,7 @@ const handleLogin = async (e: Event) => {
     toggleFormBtn.textContent = "Log out";
     toggleFormBtn.removeEventListener("click", toggleForm);
     toggleFormBtn.addEventListener("click", logOut);
+    sessionUser.renderUserLists();
   }
   clearLoginInputs();
 };
@@ -71,40 +72,51 @@ searchBtn.addEventListener("click", () => {
 
 const searchMovies = async (query: string) => {
   query = encodeURI(query);
-  console.log(query);
   const res = await fetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`
   );
   const data = (await res.json()) as QueryResponse;
-
   queryList.movieList = data.results;
-  console.log(queryList.movieList);
   queryList.renderMovieList();
-  // renderMovieList(data.results);
 };
 
-// const renderMovieList = (movieList: Film[]) => {
-//   const listContainer = document.querySelector("#query-list-container")!;
-//   listContainer.innerHTML = "";
-//   const liHeader = document.createElement("li");
-//   const h5Header = document.createElement("h5");
-//   liHeader.classList.add("list-header");
-//   h5Header.classList.add("list-header-h5");
-//   h5Header.textContent = "Nome";
-//   liHeader.appendChild(h5Header);
-//   listContainer.appendChild(liHeader);
+export const addMovieToList = async (id: string) => {
+  if (!sessionUser) return;
+  const URL = `
+  https://api.themoviedb.org/3/list/${sessionUser.currList?.id}/add_item?api_key=${apiKey}&session_id=${sessionUser.session_id}`;
+  const body = {
+    media_id: id,
+  };
+  const config = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  };
+  await fetch(URL, config);
+  await sessionUser.renderUserLists();
+};
 
-//   movieList.forEach((film) => {
-//     const li = document.createElement("li");
-//     const h5 = document.createElement("h5");
-//     const btn = document.createElement("btn");
-//     li.classList.add("list");
-//     h5.classList.add("text-gray-800");
-//     h5.textContent = film.title;
-//     btn.classList.add("list-btn");
-//     btn.textContent = "Adicionar";
-//     li.appendChild(h5);
-//     li.appendChild(btn);
-//     listContainer?.appendChild(li);
-//   });
-// };
+//Create List
+const listNameField = document.querySelector(
+  "#create-list-field"
+) as HTMLInputElement;
+const createListBtn = document.querySelector("#create-list-btn");
+
+createListBtn?.addEventListener("click", () => {
+  if (sessionUser) {
+    sessionUser.createList(listNameField.value);
+  }
+});
+
+// move through lists
+const incrementListBtn = document.querySelector("#increment")!;
+const decrementListBtn = document.querySelector("#decrement")!;
+
+incrementListBtn.addEventListener("click", () =>
+  sessionUser?.changeListIndex(ListIndexOperation.increment)
+);
+decrementListBtn.addEventListener("click", () =>
+  sessionUser?.changeListIndex(ListIndexOperation.decrement)
+);

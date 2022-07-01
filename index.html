@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="../dist/bundle.js" defer></script>
-    <link rel="stylesheet" href="../dist/output.css" />
+    <script src="./dist/bundle.js" defer></script>
+    <link rel="stylesheet" href="./dist/output.css" />
   </head>
   <body>
     <div class="flex h-full w-screen flex-col overflow-hidden font-sans">
@@ -65,9 +65,12 @@
       </section>
 
       <main
-        class="mt-32 w-full justify-center gap-5 p-5 sm:flex sm:flex-row-reverse"
+        class="mt-32 w-full justify-center gap-10 p-5 sm:flex sm:flex-row-reverse"
       >
-        <section class="flex flex-col items-center sm:w-[35rem]">
+        <section
+          id="user-list-section"
+          class="flex flex-col items-center sm:w-[35rem]"
+        >
           <h3 class="text-2xl font-semibold text-gray-800">Listas pessoais</h3>
           <p
             id="alert-login-list"
@@ -75,8 +78,39 @@
           >
             Faça o Login para visualizar suas listas
           </p>
-          <div class="my-10">
-            <ul id="list-container" class="mr-2 overflow-hidden rounded"></ul>
+
+          <div id="user-list-btn-container" class="mt-3 hidden justify-center">
+            <input
+              class="rounded border-[1px] border-cyan-900 p-1"
+              id="create-list-field"
+              placeholder="Criar nova lista"
+            />
+            <button
+              class="ml-2 rounded bg-cyan-700 p-1 px-3 text-white hover:bg-cyan-600"
+              id="create-list-btn"
+            >
+              Criar
+            </button>
+            <button
+              id="decrement"
+              class="ml-2 rounded bg-cyan-700 p-1 px-3 text-white hover:bg-cyan-600"
+            >
+              Voltar
+            </button>
+            <h6 id="list-page" class="ml-2 text-xl text-gray-800">0</h6>
+            <button
+              id="increment"
+              class="ml-2 rounded bg-cyan-700 p-1 px-3 text-white hover:bg-cyan-600"
+            >
+              Próximo
+            </button>
+          </div>
+
+          <div class="my-10 w-full">
+            <ul
+              id="user-list-container"
+              class="mr-2 overflow-hidden rounded"
+            ></ul>
           </div>
         </section>
 
