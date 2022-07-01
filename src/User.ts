@@ -8,18 +8,13 @@ export class User {
     private username: string,
     private password: string,
     private apiKey: string
-  ) {
-    this.loginUser();
-  }
-
-  isUserValidated(): boolean {
-    return this.session_id ? true : false;
-  }
+  ) {}
 
   async loginUser() {
     await this.generateToken();
     await this.validateToken();
     await this.createSession();
+    return this.session_id ? true : false;
   }
 
   async generateToken() {

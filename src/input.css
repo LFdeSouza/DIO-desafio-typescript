@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .list-header {
+    @apply flex gap-2 bg-cyan-700 p-2 text-white;
+  }
+
+  .list-header-h5 {
+    @apply w-full text-center font-semibold;
+  }
+  .list {
+    @apply flex w-full justify-between gap-2 border-b-2 border-cyan-700 bg-gray-100 p-3 last:mb-5;
+  }
+  .list-btn {
+    @apply ml-4 w-32 cursor-pointer rounded bg-cyan-700 px-2 text-center text-white hover:bg-cyan-600;
+  }
+}

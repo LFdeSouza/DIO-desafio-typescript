@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../dist/bundle.js" defer></script>
+    <link rel="stylesheet" href="../dist/output.css" />
+  </head>
+  <body>
+    <div class="flex h-full w-screen flex-col overflow-hidden font-sans">
+      <header
+        class="fixed top-0 z-50 flex w-screen max-w-full justify-between bg-cyan-900 p-4 px-10"
+      >
+        <h1 class="text-xl text-white md:text-4xl">TMDB List creator</h1>
+        <button
+          class="rounded bg-cyan-700 p-2 text-sm text-white hover:bg-cyan-600 md:mr-10 md:p-4 md:text-base"
+          data-form-toggle-btn
+        >
+          Toggle Login
+        </button>
+      </header>
+
+      <section
+        data-login-form
+        class="fixed z-20 flex h-screen min-w-max flex-col items-center bg-cyan-900 p-3 transition-all duration-300 ease-in-out"
+      >
+        <h2 class="mt-20 text-2xl text-white md:text-3xl">Login</h2>
+        <form class="my-4 mt-10">
+          <div class="relative">
+            <input
+              class="peer w-full rounded p-1 px-2 focus:outline-none"
+              id="username"
+              placeholder="Username"
+              autocomplete="off"
+            />
+            <label
+              class="absolute top-[-1rem] left-2 cursor-text text-xs text-white transition-all duration-150 peer-placeholder-shown:top-1 peer-placeholder-shown:left-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400"
+              for="username"
+              >Username</label
+            >
+          </div>
+          <div class="relative mt-5">
+            <input
+              class="peer w-full rounded p-1 px-2 placeholder:text-transparent focus:outline-none"
+              id="password"
+              placeholder="Senha"
+              type="password"
+              autocomplete="off"
+            />
+            <label
+              class="absolute top-[-1rem] left-2 cursor-text text-xs text-white transition-all duration-150 peer-placeholder-shown:top-1 peer-placeholder-shown:left-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400"
+              for="password"
+              >Password</label
+            >
+          </div>
+          <button
+            class="mt-4 w-full rounded bg-cyan-700 px-2 py-1 text-white hover:bg-cyan-600"
+            id="login-button"
+          >
+            Login
+          </button>
+        </form>
+      </section>
+
+      <main
+        class="mt-32 w-full justify-center gap-5 p-5 sm:flex sm:flex-row-reverse"
+      >
+        <section class="flex flex-col items-center sm:w-[35rem]">
+          <h3 class="text-2xl font-semibold text-gray-800">Listas pessoais</h3>
+          <p
+            id="alert-login-list"
+            class="mt-3 rounded bg-cyan-700 p-2 text-white sm:text-lg"
+          >
+            Faça o Login para visualizar suas listas
+          </p>
+          <div class="my-10">
+            <ul id="list-container" class="mr-2 overflow-hidden rounded"></ul>
+          </div>
+        </section>
+
+        <section class="flex flex-col items-center sm:w-[35rem]">
+          <h3 class="text-2xl font-semibold text-gray-800">Pesquisar Filmes</h3>
+          <div class="mt-3 flex">
+            <div class="flex justify-center" id="search-container">
+              <input
+                class="w-full min-w-[10rem] rounded border-[1px] border-cyan-900 p-1"
+                id="search"
+                placeholder="Procuar um filme"
+              />
+              <button
+                class="ml-2 rounded bg-cyan-700 px-2 text-white hover:bg-cyan-600"
+                id="search-button"
+              >
+                Pesquisar
+              </button>
+            </div>
+          </div>
+          <div class="my-10 w-full overflow-auto">
+            <ul id="query-list-container" class="overflow-hidden rounded"></ul>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
